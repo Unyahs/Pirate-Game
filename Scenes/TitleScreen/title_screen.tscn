@@ -1,0 +1,103 @@
+[gd_scene load_steps=7 format=3 uid="uid://dj16nhdcf3e06"]
+
+[ext_resource type="Script" path="res://Scripts/UI/title_screen.gd" id="1_tbvep"]
+[ext_resource type="PackedScene" uid="uid://6d3mfx2imff" path="res://Scenes/UI/parallax_bg.tscn" id="2_0oyrp"]
+[ext_resource type="Texture2D" uid="uid://qfn0mcsbviv5" path="res://Treasure Hunters/Treasure Hunters/Wood and Paper UI/Sprites/Prefabs/6.png" id="3_vuvee"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_sk6hw"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dabxh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bb3tr"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tbvep")
+metadata/_edit_lock_ = true
+
+[node name="ParallaxBg" parent="." instance=ExtResource("2_0oyrp")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -109.5
+offset_right = 95.0
+offset_bottom = 109.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_vuvee")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.5
+offset_top = -79.0
+offset_right = 60.5
+offset_bottom = 79.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/TextureRect/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Play" type="Button" parent="CanvasLayer/TextureRect/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+focus_neighbor_top = NodePath("../../HBoxContainer3/Quit")
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxEmpty_sk6hw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_dabxh")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bb3tr")
+text = "Play"
+flat = true
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="CanvasLayer/TextureRect/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="About" type="Button" parent="CanvasLayer/TextureRect/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxEmpty_sk6hw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_dabxh")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bb3tr")
+text = "About"
+flat = true
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="CanvasLayer/TextureRect/VBoxContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="Quit" type="Button" parent="CanvasLayer/TextureRect/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+focus_neighbor_bottom = NodePath("../../HBoxContainer/Play")
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxEmpty_sk6hw")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_dabxh")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bb3tr")
+text = "Quit"
+flat = true
+
+[connection signal="pressed" from="CanvasLayer/TextureRect/VBoxContainer/HBoxContainer/Play" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="CanvasLayer/TextureRect/VBoxContainer/HBoxContainer2/About" to="." method="_on_about_pressed"]
+[connection signal="pressed" from="CanvasLayer/TextureRect/VBoxContainer/HBoxContainer3/Quit" to="." method="_on_quit_pressed"]

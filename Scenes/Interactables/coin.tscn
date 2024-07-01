@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://c5g381b0fokt6"]
+
+[ext_resource type="Texture2D" uid="uid://dkdjat2jy304r" path="res://Treasure Hunters/Treasure Hunters/Pirate Treasure/Sprites/Gold Coin/03.png" id="1_m5csk"]
+[ext_resource type="Script" path="res://Scripts/Interactables/coin.gd" id="1_mg3xt"]
+[ext_resource type="Texture2D" uid="uid://y88wmg7y1dpt" path="res://Treasure Hunters/Treasure Hunters/Pirate Treasure/Sprites/Gold Coin/01.png" id="1_x1onf"]
+[ext_resource type="Texture2D" uid="uid://bj1ql0cgg4prw" path="res://Treasure Hunters/Treasure Hunters/Pirate Treasure/Sprites/Gold Coin/02.png" id="3_ns1as"]
+[ext_resource type="Texture2D" uid="uid://bern524fp6pur" path="res://Treasure Hunters/Treasure Hunters/Pirate Treasure/Sprites/Gold Coin/04.png" id="4_6h7p5"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_en4db"]
+radius = 6.0
+
+[sub_resource type="Animation" id="Animation_qchau"]
+resource_name = "Idle"
+length = 0.3
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_x1onf"), ExtResource("3_ns1as"), ExtResource("1_m5csk"), ExtResource("4_6h7p5")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0yppo"]
+_data = {
+"Idle": SubResource("Animation_qchau")
+}
+
+[node name="Coin" type="Node2D"]
+script = ExtResource("1_mg3xt")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_x1onf")
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.566902, 0.433098)
+shape = SubResource("CircleShape2D_en4db")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0yppo")
+}
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

@@ -1,0 +1,100 @@
+[gd_scene load_steps=5 format=3 uid="uid://c0ew1jl5mnafs"]
+
+[ext_resource type="Script" path="res://Scripts/UI/about_page.gd" id="2_a2ftj"]
+[ext_resource type="PackedScene" uid="uid://6d3mfx2imff" path="res://Scenes/UI/parallax_bg.tscn" id="2_xfv5e"]
+[ext_resource type="Texture2D" uid="uid://bdpkqigwk2hkc" path="res://Treasure Hunters/Treasure Hunters/Wood and Paper UI/Sprites/Mobile Buttons/Mobile Buttons/3.png" id="3_83c1e"]
+[ext_resource type="Texture2D" uid="uid://qfn0mcsbviv5" path="res://Treasure Hunters/Treasure Hunters/Wood and Paper UI/Sprites/Prefabs/6.png" id="3_is4pk"]
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_lock_ = true
+
+[node name="ParallaxBg" parent="." instance=ExtResource("2_xfv5e")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("2_a2ftj")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+texture_filter = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -216.0
+offset_top = -226.0
+offset_right = 11.0
+offset_bottom = -7.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2.1, 2.1)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+texture = ExtResource("3_is4pk")
+
+[node name="LineEdit2" type="RichTextLabel" parent="CanvasLayer/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 25.4033
+offset_top = 26.0
+offset_right = 208.403
+offset_bottom = 43.0
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center][color=black]Asset Pack:[/color] Pixel Frog[/center]"
+scroll_active = false
+
+[node name="LineEdit3" type="RichTextLabel" parent="CanvasLayer/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 19.6017
+offset_top = 55.2013
+offset_right = 206.602
+offset_bottom = 72.2013
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center][color=black]Parallax Effect:[/color] Coding Quest YT[/center]"
+scroll_active = false
+
+[node name="LineEdit4" type="RichTextLabel" parent="CanvasLayer/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 18.0
+offset_top = 82.6895
+offset_right = 211.0
+offset_bottom = 99.6895
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center][color=black]Tutorials:[/color] GameDevKnight YT[/center]"
+scroll_active = false
+
+[node name="LineEdit5" type="RichTextLabel" parent="CanvasLayer/TextureRect"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 16.7987
+offset_top = 109.914
+offset_right = 209.799
+offset_bottom = 193.914
+theme_override_font_sizes/normal_font_size = 12
+bbcode_enabled = true
+text = "[center][color=black]Group Members:[/color]
+Emman Gabriel Ybarrola
+Mark Joven Garcia
+Joanna Mae Lusterio
+Kaye Andrea Velez[/center]"
+scroll_active = false
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
+offset_left = 10.3826
+offset_top = 12.2704
+offset_right = 50.3826
+offset_bottom = 52.2704
+texture_normal = ExtResource("3_83c1e")
+stretch_mode = 0
+
+[connection signal="pressed" from="CanvasLayer/TextureButton" to="CanvasLayer" method="_on_texture_button_pressed"]

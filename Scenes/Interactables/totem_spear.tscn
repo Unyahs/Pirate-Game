@@ -1,0 +1,52 @@
+[gd_scene load_steps=10 format=3 uid="uid://d1fywp0w4whcs"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/totem_spear.gd" id="1_1v6cm"]
+[ext_resource type="Texture2D" uid="uid://d4dikd3356cid" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 1/Attack 1/1280px-HD_transparent_picture.png" id="1_p5hof"]
+[ext_resource type="Texture2D" uid="uid://vocppmbxk4nf" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Wood Spike/Destroyed/1.png" id="2_msus4"]
+[ext_resource type="Texture2D" uid="uid://372k0tohmjg4" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Wood Spike/Idle/1.png" id="2_pvx6x"]
+[ext_resource type="Texture2D" uid="uid://hfjceos2sxj2" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Wood Spike/Destroyed/2.png" id="3_umvcr"]
+[ext_resource type="Texture2D" uid="uid://jd7ypoo714mx" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Wood Spike/Destroyed/3.png" id="4_eo6me"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kvlrw"]
+size = Vector2(8.09246, 4.2548)
+
+[sub_resource type="Animation" id="Animation_xh3bu"]
+resource_name = "Hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("2_msus4"), ExtResource("3_umvcr"), ExtResource("4_eo6me"), ExtResource("1_p5hof")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_wmjs4"]
+_data = {
+"Hit": SubResource("Animation_xh3bu")
+}
+
+[node name="TotemSpear" type="Node2D"]
+script = ExtResource("1_1v6cm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_pvx6x")
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.0929279, -0.0148764)
+shape = SubResource("RectangleShape2D_kvlrw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_wmjs4")
+}
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

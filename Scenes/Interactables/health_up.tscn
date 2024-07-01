@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://du8yjl0msrjip"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/health_up.gd" id="1_a0w20"]
+[ext_resource type="Texture2D" uid="uid://dso14cbpa4ikg" path="res://Treasure Hunters/Treasure Hunters/Pirate Ship/Sprites/Heart.png" id="2_qq568"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gic34"]
+radius = 7.12938
+
+[node name="HealthUp" type="Node2D"]
+script = ExtResource("1_a0w20")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_qq568")
+
+[node name="Area2D" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_gic34")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

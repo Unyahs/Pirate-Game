@@ -1,0 +1,87 @@
+[gd_scene load_steps=15 format=3 uid="uid://b1n76sd6ewh5i"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/checkpoint.gd" id="1_7k1bo"]
+[ext_resource type="Texture2D" uid="uid://dysdvxqvo218k" path="res://Treasure Hunters/Treasure Hunters/Palm Tree Island/Sprites/Objects/Flag/Flag 09.png" id="2_mw2si"]
+[ext_resource type="Texture2D" uid="uid://bhrrk6022rr87" path="res://Treasure Hunters/Treasure Hunters/Palm Tree Island/Sprites/Objects/Flag/Flag 01.png" id="3_s6tis"]
+[ext_resource type="Texture2D" uid="uid://cqei0q2ivi33a" path="res://Treasure Hunters/Treasure Hunters/Palm Tree Island/Sprites/Objects/Flag/Flag 02.png" id="4_35p5c"]
+[ext_resource type="Texture2D" uid="uid://cf7lewb5vhfhk" path="res://Treasure Hunters/Treasure Hunters/Palm Tree Island/Sprites/Objects/Flag/Flag 03.png" id="5_o0g0c"]
+[ext_resource type="Texture2D" uid="uid://cjps34iexlrnv" path="res://Treasure Hunters/Treasure Hunters/Palm Tree Island/Sprites/Objects/Flag/Flag 04.png" id="6_55yxf"]
+[ext_resource type="Texture2D" uid="uid://nvo5ci0dciwu" path="res://Treasure Hunters/Treasure Hunters/Palm Tree Island/Sprites/Objects/Flag/Flag 05.png" id="7_d5s4u"]
+[ext_resource type="Texture2D" uid="uid://dfysio1ap7w2g" path="res://Treasure Hunters/Treasure Hunters/Palm Tree Island/Sprites/Objects/Flag/Flag 06.png" id="8_hqv2f"]
+[ext_resource type="Texture2D" uid="uid://c4jbw78rrbxx4" path="res://Treasure Hunters/Treasure Hunters/Palm Tree Island/Sprites/Objects/Flag/Flag 07.png" id="9_px1su"]
+[ext_resource type="Texture2D" uid="uid://d15t8vhg6t46e" path="res://Treasure Hunters/Treasure Hunters/Palm Tree Island/Sprites/Objects/Flag/Flag 08.png" id="10_gyusg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oe73k"]
+size = Vector2(40, 97)
+
+[sub_resource type="Animation" id="Animation_ye8ee"]
+resource_name = "Activate"
+length = 0.8
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_s6tis"), ExtResource("4_35p5c"), ExtResource("5_o0g0c"), ExtResource("6_55yxf"), ExtResource("7_d5s4u"), ExtResource("8_hqv2f"), ExtResource("9_px1su"), ExtResource("10_gyusg"), ExtResource("2_mw2si")]
+}
+
+[sub_resource type="Animation" id="Animation_42u24"]
+resource_name = "Crumble"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("3_s6tis"), ExtResource("3_s6tis")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7y7dm"]
+_data = {
+"Activate": SubResource("Animation_ye8ee"),
+"Crumble": SubResource("Animation_42u24")
+}
+
+[node name="Checkpoint" type="Node2D"]
+script = ExtResource("1_7k1bo")
+win_condition = true
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_s6tis")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(-1, -0.5)
+shape = SubResource("RectangleShape2D_oe73k")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_7y7dm")
+}
+
+[connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]

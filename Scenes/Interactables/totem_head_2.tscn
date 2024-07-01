@@ -1,0 +1,110 @@
+[gd_scene load_steps=17 format=3 uid="uid://chdbj8ti8k7a4"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/totem_head_2.gd" id="1_xws7x"]
+[ext_resource type="Texture2D" uid="uid://cqfgo45j2nbmj" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 2/Attack 1/1.png" id="3_onhv0"]
+[ext_resource type="Texture2D" uid="uid://l8y4svun3m35" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 2/Attack 1/2.png" id="4_tbo0p"]
+[ext_resource type="Texture2D" uid="uid://b0nqil326oksk" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 2/Attack 1/3.png" id="6_br8v3"]
+[ext_resource type="Texture2D" uid="uid://wmy1hiq1styp" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 2/Attack 1/4.png" id="7_xdvgu"]
+[ext_resource type="Texture2D" uid="uid://b6qku0tthsd6u" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 2/Attack 1/5.png" id="8_shet1"]
+[ext_resource type="Texture2D" uid="uid://co8o0anc1jy1" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 2/Attack 1/6.png" id="10_8fhbn"]
+[ext_resource type="Texture2D" uid="uid://bpa3x7xp2ecsx" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 2/Hit 1/1.png" id="11_gw0bx"]
+[ext_resource type="Texture2D" uid="uid://bm6xlidbmc20n" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 2/Hit 1/2.png" id="12_sfj4l"]
+[ext_resource type="Texture2D" uid="uid://5wqkndc73pou" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 2/Hit 1/3.png" id="14_4va0n"]
+[ext_resource type="Texture2D" uid="uid://d57p8fc42olu" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 2/Hit 1/4.png" id="15_phrkc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_if2nn"]
+size = Vector2(20.7672, 23.9037)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdw3l"]
+size = Vector2(21.2326, 20.6473)
+
+[sub_resource type="Animation" id="Animation_du7me"]
+resource_name = "Fire"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.4001, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_onhv0"), ExtResource("4_tbo0p"), ExtResource("6_br8v3"), ExtResource("7_xdvgu"), ExtResource("8_shet1"), ExtResource("8_shet1"), ExtResource("10_8fhbn")]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fire"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_nhtqn"]
+resource_name = "Hit"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [ExtResource("11_gw0bx"), ExtResource("12_sfj4l"), ExtResource("14_4va0n"), ExtResource("15_phrkc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:shooting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_pcpht"]
+_data = {
+"Fire": SubResource("Animation_du7me"),
+"Hit": SubResource("Animation_nhtqn")
+}
+
+[node name="TotemHead2" type="StaticBody2D" groups=["Enemies"]]
+script = ExtResource("1_xws7x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("15_phrkc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.104665, 3.67011)
+shape = SubResource("RectangleShape2D_if2nn")
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-2.12372, 0.943874)
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0.531977, 3.1081)
+shape = SubResource("RectangleShape2D_tdw3l")
+
+[node name="Firepoint" type="Marker2D" parent="."]
+position = Vector2(-7.33761, 8.79363)
+scale = Vector2(-1, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_pcpht")
+}

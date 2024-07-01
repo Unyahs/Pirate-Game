@@ -1,0 +1,71 @@
+[gd_scene load_steps=6 format=3 uid="uid://djy31fb246jgs"]
+
+[ext_resource type="Script" path="res://Scripts/Interactables/falling_spikes.gd" id="1_2b3b8"]
+[ext_resource type="Texture2D" uid="uid://btxpqc27qymet" path="res://Treasure Hunters/Treasure Hunters/Palm Tree Island/Sprites/Objects/Spikes/FallingSpikes.png" id="1_ylwwr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1yagj"]
+size = Vector2(40, 225)
+
+[sub_resource type="Animation" id="Animation_xytyt"]
+resource_name = "Shake"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 16), Vector2(-1, 16), Vector2(1, 16), Vector2(3, 16)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fall"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_j6wjj"]
+_data = {
+"Shake": SubResource("Animation_xytyt")
+}
+
+[node name="FallingSpikes" type="Node2D"]
+script = ExtResource("1_2b3b8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(3, 16)
+rotation = 3.14159
+scale = Vector2(0.988295, 1.00585)
+texture = ExtResource("1_ylwwr")
+
+[node name="Hitbox" type="Area2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Hitbox"]
+polygon = PackedVector2Array(-11, 0, -11, 8, -8, 13, -7, 13, -4, 8, -3, 10, 0, 16, 1, 16, 4, 11, 4, 8, 6, 8, 8, 11, 9, 11, 12, 5, 12, 0)
+
+[node name="Detec" type="Area2D" parent="."]
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Detec"]
+position = Vector2(1, 112.5)
+shape = SubResource("RectangleShape2D_1yagj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_j6wjj")
+}
+
+[connection signal="area_entered" from="Hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="area_entered" from="Detec" to="." method="_on_detec_area_entered"]

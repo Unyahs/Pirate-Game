@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://da8vq7r634kyk"]
+
+[ext_resource type="Texture2D" uid="uid://dq0geewbp8kpy" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 1/Destroyed/1.png" id="1_g0y51"]
+[ext_resource type="Texture2D" uid="uid://p5g1i8rnthq1" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 1/Destroyed/2.png" id="2_6msd5"]
+[ext_resource type="Texture2D" uid="uid://dkpwi5hdrfn1i" path="res://Treasure Hunters/Treasure Hunters/Shooter Traps/Sprites/Totems/Head 1/Destroyed/5.png" id="3_j8yqr"]
+
+[sub_resource type="Animation" id="Animation_4j6ah"]
+resource_name = "Crumble"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("1_g0y51"), ExtResource("2_6msd5"), ExtResource("3_j8yqr")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 6)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m1etf"]
+_data = {
+"Crumble": SubResource("Animation_4j6ah")
+}
+
+[node name="TotemHead1Debris" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_g0y51")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m1etf")
+}
